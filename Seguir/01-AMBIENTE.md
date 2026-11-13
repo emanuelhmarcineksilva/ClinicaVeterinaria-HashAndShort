@@ -54,6 +54,7 @@ PetHashSort/
 ```
 
 No IntelliJ:
+
 - Clique com o botão direito no projeto para criar a pasta `dados`.
 - Dentro de `src`, crie o pacote `pethashsort` (`New > Package`).
 - Dentro do pacote, serão criadas as classes Java.
@@ -113,6 +114,7 @@ O formato será uma linha por pet, com os campos separados por ponto e vírgula:
 ```
 
 A primeira parte do desenvolvimento deve incluir os 20 pets do apêndice e pelo menos mais 30 criados pelo grupo. Confiram:
+
 - microchip com exatamente 8 dígitos;
 - nenhum microchip repetido;
 - nome, espécie e mania preenchidos;
@@ -141,10 +143,12 @@ O `4` limita a divisão a quatro partes, evitando separar a mania caso ela tenha
 ## 9. Como o grupo vai compartilhar o projeto
 
 Escolham **um lugar oficial** para manter o código atualizado:
+
 - GitHub privado/público, se todos já souberem usar; ou
 - uma pasta compartilhada, se for o caminho mais rápido para o grupo.
 
 Se usarem Git:
+
 1. Uma pessoa cria o repositório.
 2. Todos clonam o mesmo projeto.
 3. Cada integrante trabalha em uma parte/branch ou combina quem edita cada arquivo.
