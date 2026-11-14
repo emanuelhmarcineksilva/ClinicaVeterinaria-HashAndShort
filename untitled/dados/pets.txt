@@ -1,0 +1,54 @@
+# Bichinhos da Creche dos Bichos - formato: microchip;nome;especie;mania
+# Linhas que comecam com # sao ignoradas. Microchip: 8 digitos, nunca repete.
+# ---- Turminha inicial (Apendice do enunciado) ----
+60218841;Luna;gata;dorme em cima do teclado
+31057720;Thor;cão;late para o aspirador
+48812903;Pipoca;cão;pula quando ouve a palavra "passeio"
+22091187;Mel;gata;derruba copos da mesa, um por um
+70334512;Zeus;cão;tem medo do gato do vizinho
+51200468;Amora;gata;mia para a geladeira
+13870255;Luna;cachorra;rouba meias
+39021746;Bob;cão;come a ração do irmão
+84460013;Bob;gato;dorme 20 horas por dia
+27719384;Lola;cachorra;adora tomar banho
+65502291;Paçoca;gato;caça o ponteiro laser
+44183067;Frida;cachorra;usa laço e se acha
+90027758;Simba;gato;acha que é leão
+18345602;Nina;coelha;rói o fio do carregador
+76690431;Pandora;gata;abre portas sozinha
+33208179;Chico;papagaio;imita o toque do celular
+57741820;Thor;gato;tem nome de cão, mas é gato
+81196354;Fred;hamster;corre a noite inteira na rodinha
+29573006;Luna;calopsita;assobia quando alguém chega
+62015547;Toddy;cão;só come se for na mão
+# ---- 30 bichinhos novos criados pelo grupo ----
+47120395;Luna;cachorra;late para a própria sombra
+85301726;Luna;gata;dorme dentro da máquina de lavar
+19274635;Luna;coelha;rói o rodapé da cozinha
+12093847;Thor;cão;esconde o controle remoto
+66489012;Thor;coelho;cava buracos no sofá
+56481920;Thor;calopsita;grita quando o dono sai de casa
+30958174;Bob;hamster;guarda comida nas bochechas para o inverno
+92846105;Bob;papagaio;canta o hino do time
+74036518;Bob;cão;dorme de barriga para cima
+54017263;Mel;cachorra;chora quando a novela acaba
+23674018;Mel;gata;derruba o porta-retrato toda manhã
+59302714;Amor;gata;só dorme no colo da visita
+16748390;Roma;cachorra;late para pombos imaginários
+71520936;Max;cão;foge do banho pulando o muro
+38841052;Nala;gata;acha que é dona da casa
+80265143;Bidu;cão;espirra quando está feliz
+43910578;Pretinha;gata;bebe água da torneira
+27365081;Paçoca;cão;enterra meias no quintal
+64829310;Pipoca;hamster;dá cambalhota na rodinha
+95102846;Nina;calopsita;assobia a música do caminhão de gás
+34587019;Maya;gata;persegue a luz do celular
+78603425;Tobias;jabuti;foge, mas muito devagar
+11594068;Fred;cão;tem ciúmes do aspirador
+50738291;Kiara;cachorra;usa capa de chuva e se acha
+87412650;Simba;cão;rosna para o espelho
+25089734;Lola;gata;mia às 4 da manhã
+69157803;Zeus;gato;derruba vasos de planta
+40623187;Belinha;coelha;ataca cadarços
+83950472;Chico;cão;anda de skate no parque
+32719864;Frida;gata;pede ração batendo na tigela
