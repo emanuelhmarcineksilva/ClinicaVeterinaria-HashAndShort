@@ -1,391 +1,255 @@
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
-/*
- * =====================================================================================
- *  PROJETO FINAL: PET HASH & SORT - CÓDIGO MODELO BASE
- *  Resolução de Problemas Estruturados em Computação - Profa. Lisiane Reips
- * =====================================================================================
- *  Este código segue ESTRITAMENTE a estrutura e o estilo didático do material de apoio
- *  da professora (Tabela Hash com Encadeamento Exterior, Bubble Sort, Insertion Sort
- *  e Quick Sort), adaptado para a classe Pet exigida no Projeto Final.
- * =====================================================================================
- */
 public class PetHashSortBase {
+    private static final int CAPACIDADE_INICIAL = 13;
 
-    // ---------------------------------------------------------------------------------
-    // 1. CLASSE MODELO: PET
-    // ---------------------------------------------------------------------------------
-    public static class Pet {
-        long microchip; // Identificador único (8 dígitos)
-        String nome;     // Chave de busca na Tabela Hash
-        String especie;  // ex: cão, gato, calopsita
-        String mania;    // ex: "dorme no teclado", "rouba meias"
-
-        public Pet(long microchip, String nome, String especie, String mania) {
-            this.microchip = microchip;
-            this.nome = nome;
-            this.especie = especie;
-            this.mania = mania;
-        }
-
-        @Override
-        public String toString() {
-            return "[" + microchip + "] " + nome + " (" + especie + ") - Mania: " + mania;
-        }
-    }
-
-    // ---------------------------------------------------------------------------------
-    // 2. ESTRUTURA DE DADOS: TABELA HASH COM ENCADEAMENTO EXTERIOR
-    // ---------------------------------------------------------------------------------
-    public static class TabelaHashPet {
-        private LinkedList<Pet>[] tabela;
-        private int capacidade;
-        private int quantidade;
-
-        @SuppressWarnings("unchecked")
-        public TabelaHashPet(int capacidade) {
-            this.capacidade = capacidade;
-            this.quantidade = 0;
-            this.tabela = new LinkedList[capacidade];
-            for (int i = 0; i < capacidade; i++) {
-                this.tabela[i] = new LinkedList<>();
-            }
-        }
-
-        // FUNÇÃO HASH 1: Soma dos códigos ASCII (igual ao material de apoio da professora)
-        public int hash1(String chave) {
-            int soma = 0;
-            String chaveUpper = chave.toUpperCase();
-            for (int i = 0; i < chaveUpper.length(); i++) {
-                soma += chaveUpper.charAt(i);
-            }
-            return Math.floorMod(soma, capacidade);
-        }
-
-        // FUNÇÃO HASH 2: Polinomial (estilo String.hashCode() do Java)
-        public int hash2(String chave) {
-            int h = 0;
-            String chaveUpper = chave.toUpperCase();
-            for (int i = 0; i < chaveUpper.length(); i++) {
-                h = 31 * h + chaveUpper.charAt(i);
-            }
-            return Math.floorMod(h, capacidade);
-        }
-
-        // INSERIR PET
-        public void inserir(Pet pet) {
-            int indice = hash1(pet.nome);
-            tabela[indice].add(pet);
-            quantidade++;
-        }
-
-        // BUSCAR PETS POR NOME (retorna todos os pets que compartilham o mesmo nome/chave)
-        public LinkedList<Pet> buscarPorNome(String nome) {
-            int indice = hash1(nome);
-            LinkedList<Pet> encontrados = new LinkedList<>();
-            for (Pet p : tabela[indice]) {
-                if (p.nome.equalsIgnoreCase(nome)) {
-                    encontrados.add(p);
-                }
-            }
-            return encontrados;
-        }
-
-        // REMOVER PET POR MICROCHIP
-        public boolean removerPorMicrochip(long microchip, String nome) {
-            int indice = hash1(nome);
-            Pet petEncontrado = null;
-            for (Pet p : tabela[indice]) {
-                if (p.microchip == microchip) {
-                    petEncontrado = p;
-                    break;
-                }
-            }
-            if (petEncontrado != null) {
-                tabela[indice].remove(petEncontrado);
-                quantidade--;
-                return true;
-            }
-            return false;
-        }
-
-        // EXIBIR ESTRUTURA DA TABELA HASH
-        public void exibir() {
-            System.out.println("\n--- FICHÁRIO DA TABELA HASH (M = " + capacidade + ") ---");
-            for (int i = 0; i < capacidade; i++) {
-                System.out.print("[" + i + "] ");
-                if (tabela[i].isEmpty()) {
-                    System.out.println("null");
-                } else {
-                    for (int j = 0; j < tabela[i].size(); j++) {
-                        Pet p = tabela[i].get(j);
-                        System.out.print(p.nome + " (" + p.microchip + ")");
-                        if (j < tabela[i].size() - 1) System.out.print(" -> ");
-                    }
-                    System.out.println(" -> null");
-                }
-            }
-        }
-
-        // ESTATÍSTICAS EXIGIDAS NO PROJETO
-        public void exibirEstatísticas() {
-            double fatorDeCarga = (double) quantidade / capacidade;
-            int baldesVazios = 0;
-            int maiorLista = 0;
-            int colisoes = 0;
-
-            for (int i = 0; i < capacidade; i++) {
-                int tam = tabela[i].size();
-                if (tam == 0) {
-                    baldesVazios++;
-                } else {
-                    if (tam > 1) {
-                        colisoes += (tam - 1);
-                    }
-                    if (tam > maiorLista) {
-                        maiorLista = tam;
-                    }
-                }
-            }
-
-            System.out.println("\n--- ESTATÍSTICAS DA TABELA HASH ---");
-            System.out.println("Capacidade (M): " + capacidade);
-            System.out.println("Total de Pets cadastrados: " + quantidade);
-            System.out.printf("Fator de Carga (FC): %.2f\n", fatorDeCarga);
-            System.out.println("Baldes vazios: " + baldesVazios);
-            System.out.println("Tamanho da maior lista: " + maiorLista);
-            System.out.println("Número de colisões: " + colisoes);
-        }
-    }
-
-    // ---------------------------------------------------------------------------------
-    // 3. ALGORITMOS DE ORDENAÇÃO POR MICROCHIP (ESTILO MATERIAL DE APOIO)
-    // ---------------------------------------------------------------------------------
-
-    // 3.1 BUBBLE SORT
-    public static void bubbleSort(Pet[] v) {
-        int n = v.length;
-        long comparacoes = 0;
-        long trocas = 0;
-
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - 1 - i; j++) {
-                comparacoes++;
-                if (v[j].microchip > v[j + 1].microchip) {
-                    Pet aux = v[j];
-                    v[j] = v[j + 1];
-                    v[j + 1] = aux;
-                    trocas++;
-                }
-            }
-        }
-        System.out.println("Bubble Sort concluído -> Comparações: " + comparacoes + " | Trocas: " + trocas);
-    }
-
-    // 3.2 INSERTION SORT
-    public static void insertionSort(Pet[] v) {
-        int n = v.length;
-        long comparacoes = 0;
-        long trocas = 0; // Deslocamentos
-
-        for (int i = 1; i < n; i++) {
-            Pet chave = v[i];
-            int j = i - 1;
-
-            while (j >= 0) {
-                comparacoes++;
-                if (v[j].microchip > chave.microchip) {
-                    v[j + 1] = v[j];
-                    trocas++;
-                    j--;
-                } else {
-                    break;
-                }
-            }
-            v[j + 1] = chave;
-        }
-        System.out.println("Insertion Sort concluído -> Comparações: " + comparacoes + " | Deslocamentos: " + trocas);
-    }
-
-    // 3.3 QUICK SORT
-    public static class MetricasQuick {
-        long comparacoes = 0;
-        long trocas = 0;
-    }
-
-    public static void quickSort(Pet[] v, int inicio, int fim, MetricasQuick m) {
-        if (inicio < fim) {
-            int posPivot = particionar(v, inicio, fim, m);
-            quickSort(v, inicio, posPivot - 1, m);
-            quickSort(v, posPivot + 1, fim, m);
-        }
-    }
-
-    private static int particionar(Pet[] v, int inicio, int fim, MetricasQuick m) {
-        Pet pivot = v[fim]; // Pivot = último elemento
-        int i = inicio - 1;
-
-        for (int j = inicio; j < fim; j++) {
-            m.comparacoes++;
-            if (v[j].microchip < pivot.microchip) {
-                i++;
-                trocar(v, i, j);
-                m.trocas++;
-            }
-        }
-        trocar(v, i + 1, fim);
-        m.trocas++;
-        return i + 1;
-    }
-
-    private static void trocar(Pet[] v, int a, int b) {
-        Pet aux = v[a];
-        v[a] = v[b];
-        v[b] = aux;
-    }
-
-    // Função Auxiliar para imprimir vetor de Pets
-    public static void imprimirVetor(Pet[] v) {
-        for (Pet p : v) {
-            System.out.println("  " + p);
-        }
-    }
-
-    // ---------------------------------------------------------------------------------
-    // 4. MENU PRINCIPAL DE CONSOLE (MODELO CONFORME EXIGIDO NO PROJETO)
-    // ---------------------------------------------------------------------------------
     public static void main(String[] args) {
-        // Tabela Hash com M = 13 (conforme especificado na Parte 1 do projeto)
-        TabelaHashPet tabela = new TabelaHashPet(13);
-
-        // Turminha inicial do Apêndice do projeto para testes
-        Pet[] dadosIniciais = {
-            new Pet(60218841L, "Luna", "gata", "dorme em cima do teclado"),
-            new Pet(31057720L, "Thor", "cão", "late para o aspirador"),
-            new Pet(48812903L, "Pipoca", "cão", "pula quando ouve a palavra passeio"),
-            new Pet(22091187L, "Mel", "gata", "derruba copos da mesa, um por um"),
-            new Pet(70334512L, "Zeus", "cão", "tem medo do gato do vizinho"),
-            new Pet(13870255L, "Luna", "cachorra", "rouba meias"),
-            new Pet(39021746L, "Bob", "cão", "come a ração do irmão"),
-            new Pet(84460013L, "Bob", "gato", "dorme 20 horas por day")
-        };
-
-        // Inserir dados iniciais na tabela hash
-        for (Pet p : dadosIniciais) {
-            tabela.inserir(p);
+        Path arquivo = Paths.get("dados", "pets.txt");
+        if (!Files.exists(arquivo)) {
+            arquivo = Paths.get("Seguir", "dados", "pets.txt");
         }
 
+        final Pet[] petsIniciais;
+        try {
+            petsIniciais = ArquivoPets.ler(arquivo.toString());
+        } catch (IOException e) {
+            System.err.println("Nao foi possivel carregar os dados iniciais: " + e.getMessage());
+            return;
+        }
+
+        TabelaHashPets tabela = new TabelaHashPets(CAPACIDADE_INICIAL);
+        for (Pet pet : petsIniciais) {
+            if (!tabela.inserir(pet)) {
+                System.err.println("Microchip inicial duplicado: " + pet.getMicrochip());
+                return;
+            }
+        }
+
+        System.out.println("Pet Hash & Sort — " + petsIniciais.length + " pets carregados.");
         Scanner scanner = new Scanner(System.in);
-        int opcao = -1;
+        boolean executando = true;
 
-        while (opcao != 0) {
-            System.out.println("\n==========================================");
-            System.out.println("    ♥ PET HASH & SORT - CLINICA VET ♥");
-            System.out.println("==========================================");
-            System.out.println("1 - Cadastrar pet");
-            System.out.println("2 - Buscar pets por nome");
-            System.out.println("3 - Remover pet (microchip)");
-            System.out.println("4 - Mostrar fichário (tabela hash)");
-            System.out.println("5 - Estatísticas da tabela");
-            System.out.println("6 - Organizar sala de espera (Ordenar por Microchip)");
-            System.out.println("0 - Fechar a clínica");
-            System.out.println("==========================================");
-            System.out.print("Escolha uma opção: ");
-
-            if (scanner.hasNextInt()) {
-                opcao = scanner.nextInt();
-                scanner.nextLine(); // Consumir quebra de linha
-            } else {
-                scanner.nextLine();
-                continue;
+        while (executando) {
+            exibirMenu();
+            Integer opcao = lerInteiro(scanner, "Escolha uma opcao: ");
+            if (opcao == null) {
+                break;
             }
 
             switch (opcao) {
                 case 1:
-                    System.out.print("Microchip (8 dígitos): ");
-                    long chip = scanner.nextLong();
-                    scanner.nextLine();
-                    System.out.print("Nome: ");
-                    String nome = scanner.nextLine();
-                    System.out.print("Espécie: ");
-                    String esp = scanner.nextLine();
-                    System.out.print("Mania: ");
-                    String mania = scanner.nextLine();
-
-                    Pet novo = new Pet(chip, nome, esp, mania);
-                    tabela.inserir(novo);
-                    System.out.println("-> Pet cadastrado com sucesso!");
+                    cadastrarPet(scanner, tabela);
                     break;
-
                 case 2:
-                    System.out.print("Digite o nome do pet para buscar: ");
-                    String buscaNome = scanner.nextLine();
-                    LinkedList<Pet> achados = tabela.buscarPorNome(buscaNome);
-                    if (achados.isEmpty()) {
-                        System.out.println("Nenhum pet encontrado com o nome " + buscaNome);
-                    } else {
-                        System.out.println("Pets encontrados (" + achados.size() + "):");
-                        for (Pet p : achados) {
-                            System.out.println("  " + p);
-                        }
-                    }
+                    buscarPets(scanner, tabela);
                     break;
-
                 case 3:
-                    System.out.print("Digite o nome do pet: ");
-                    String rNome = scanner.nextLine();
-                    System.out.print("Digite o microchip do pet a remover: ");
-                    long rChip = scanner.nextLong();
-                    scanner.nextLine();
-
-                    if (tabela.removerPorMicrochip(rChip, rNome)) {
-                        System.out.println("-> Pet removido com sucesso!");
-                    } else {
-                        System.out.println("-> Pet não encontrado.");
-                    }
+                    removerPet(scanner, tabela);
                     break;
-
                 case 4:
                     tabela.exibir();
                     break;
-
                 case 5:
-                    tabela.exibirEstatísticas();
+                    tabela.estatisticas().exibir("Tabela atual", 1);
+                    TabelaHashPets.exibirComparacao(tabela.listarTodos());
                     break;
-
                 case 6:
-                    // Criar cópia dos dados iniciais para testar os algoritmos de ordenação
-                    Pet[] copiaBubble = Arrays.copyOf(dadosIniciais, dadosIniciais.length);
-                    Pet[] copiaInsertion = Arrays.copyOf(dadosIniciais, dadosIniciais.length);
-                    Pet[] copiaQuick = Arrays.copyOf(dadosIniciais, dadosIniciais.length);
-
-                    System.out.println("\n--- TESTANDO ALGORITMOS DE ORDENAÇÃO ---");
-
-                    System.out.println("\n1. Executando Bubble Sort...");
-                    bubbleSort(copiaBubble);
-
-                    System.out.println("\n2. Executando Insertion Sort...");
-                    insertionSort(copiaInsertion);
-
-                    System.out.println("\n3. Executando Quick Sort...");
-                    MetricasQuick mq = new MetricasQuick();
-                    quickSort(copiaQuick, 0, copiaQuick.length - 1, mq);
-                    System.out.println("Quick Sort concluído -> Comparações: " + mq.comparacoes + " | Trocas: " + mq.trocas);
-
-                    System.out.println("\n--- VETOR ORDENADO (POR MICROCHIP) ---");
-                    imprimirVetor(copiaQuick);
+                    organizarFila(tabela);
                     break;
-
+                case 7:
+                    ordenarPassoAPasso(scanner, tabela);
+                    break;
+                case 8:
+                    GrandeCorrida.executar();
+                    break;
                 case 0:
-                    System.out.println("Saindo do sistema. Até logo!");
+                    executando = false;
+                    System.out.println("Sistema encerrado.");
                     break;
-
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("Opcao invalida. Escolha um numero do menu.");
             }
         }
         scanner.close();
+    }
+
+    private static void exibirMenu() {
+        System.out.println("\n======================================");
+        System.out.println("       PET HASH & SORT - CLINICA");
+        System.out.println("======================================");
+        System.out.println("1 - Cadastrar pet");
+        System.out.println("2 - Buscar pets por nome");
+        System.out.println("3 - Remover pet pelo microchip");
+        System.out.println("4 - Mostrar fichario completo");
+        System.out.println("5 - Estatisticas e comparacao das funcoes hash");
+        System.out.println("6 - Organizar fila da sala de espera");
+        System.out.println("7 - Ordenacao passo a passo");
+        System.out.println("8 - A Grande Corrida");
+        System.out.println("0 - Encerrar");
+    }
+
+    private static void cadastrarPet(Scanner scanner, TabelaHashPets tabela) {
+        Long microchip = lerMicrochip(scanner, "Microchip (8 digitos): ");
+        if (microchip == null) {
+            return;
+        }
+        if (tabela.contemMicrochip(microchip)) {
+            System.out.println("Ja existe um pet com esse microchip.");
+            return;
+        }
+
+        String nome = lerTexto(scanner, "Nome: ");
+        if (nome == null) return;
+        String especie = lerTexto(scanner, "Especie: ");
+        if (especie == null) return;
+        String mania = lerTexto(scanner, "Mania: ");
+        if (mania == null) return;
+
+        try {
+            Pet pet = new Pet(microchip, nome, especie, mania);
+            if (tabela.inserir(pet)) {
+                System.out.println("Pet cadastrado: " + pet);
+            } else {
+                System.out.println("Ja existe um pet com esse microchip.");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Cadastro invalido: " + e.getMessage());
+        }
+    }
+
+    private static void buscarPets(Scanner scanner, TabelaHashPets tabela) {
+        String nome = lerTexto(scanner, "Nome para busca: ");
+        if (nome == null) return;
+        Pet[] encontrados = tabela.buscarPorNome(nome);
+        if (encontrados.length == 0) {
+            System.out.println("Nenhum pet encontrado com esse nome.");
+            return;
+        }
+        System.out.println("Pets encontrados (" + encontrados.length + "):");
+        Ordenacao.exibirPets(encontrados);
+    }
+
+    private static void removerPet(Scanner scanner, TabelaHashPets tabela) {
+        Long microchip = lerMicrochip(scanner, "Microchip do pet a remover: ");
+        if (microchip == null) return;
+        Pet removido = tabela.removerPorMicrochip(microchip);
+        if (removido == null) {
+            System.out.println("Nenhum pet encontrado com esse microchip.");
+        } else {
+            System.out.println("Pet removido: " + removido);
+        }
+    }
+
+    private static void organizarFila(TabelaHashPets tabela) {
+        Pet[] pets = tabela.listarTodos();
+        if (pets.length == 0) {
+            System.out.println("Nao ha pets cadastrados para ordenar.");
+            return;
+        }
+
+        Pet[] bubble = Ordenacao.copiar(pets);
+        ResultadoOrdenacao resultadoBubble = Ordenacao.bubbleSort(bubble, false);
+        Ordenacao.exibirResultado("Bubble Sort", resultadoBubble);
+
+        Pet[] insertion = Ordenacao.copiar(pets);
+        ResultadoOrdenacao resultadoInsertion = Ordenacao.insertionSort(insertion, false);
+        Ordenacao.exibirResultado("Insertion Sort", resultadoInsertion);
+
+        Pet[] quick = Ordenacao.copiar(pets);
+        ResultadoOrdenacao resultadoQuick = Ordenacao.quickSort(quick, false);
+        Ordenacao.exibirResultado("Quick Sort", resultadoQuick);
+
+        System.out.println("\nFila em ordem crescente de microchip:");
+        Ordenacao.exibirPets(quick);
+    }
+
+    private static void ordenarPassoAPasso(Scanner scanner, TabelaHashPets tabela) {
+        Pet[] pets = tabela.listarTodos();
+        if (pets.length == 0) {
+            System.out.println("Nao ha pets cadastrados para ordenar.");
+            return;
+        }
+
+        int limite = Math.min(10, pets.length);
+        System.out.println("A demonstracao usa de 1 a " + limite + " pets.");
+        Integer quantidade = lerInteiro(scanner, "Quantidade de pets: ");
+        if (quantidade == null) return;
+        if (quantidade < 1 || quantidade > limite) {
+            System.out.println("Quantidade invalida.");
+            return;
+        }
+
+        System.out.println("1 - Bubble Sort");
+        System.out.println("2 - Insertion Sort");
+        System.out.println("3 - Quick Sort");
+        Integer algoritmo = lerInteiro(scanner, "Algoritmo: ");
+        if (algoritmo == null) return;
+        if (algoritmo < 1 || algoritmo > 3) {
+            System.out.println("Algoritmo invalido.");
+            return;
+        }
+
+        Pet[] demonstracao = new Pet[quantidade];
+        System.arraycopy(pets, 0, demonstracao, 0, quantidade);
+        System.out.println("\nFila antes da demonstracao:");
+        Ordenacao.exibirPets(demonstracao);
+
+        ResultadoOrdenacao resultado;
+        if (algoritmo == 1) {
+            resultado = Ordenacao.bubbleSort(demonstracao, true);
+            System.out.println("\nBubble Sort — trocas: "
+                    + resultado.getTrocasOuDeslocamentos());
+        } else if (algoritmo == 2) {
+            resultado = Ordenacao.insertionSort(demonstracao, true);
+            System.out.println("\nInsertion Sort — deslocamentos: "
+                    + resultado.getTrocasOuDeslocamentos());
+        } else {
+            resultado = Ordenacao.quickSort(demonstracao, true);
+            System.out.println("\nQuick Sort — trocas: "
+                    + resultado.getTrocasOuDeslocamentos());
+        }
+        System.out.println("Comparacoes: " + resultado.getComparacoes());
+        System.out.println("Fila ordenada:");
+        Ordenacao.exibirPets(demonstracao);
+    }
+
+    private static String lerTexto(Scanner scanner, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+            if (!scanner.hasNextLine()) return null;
+            String valor = scanner.nextLine().trim();
+            if (!valor.isEmpty()) return valor;
+            System.out.println("O campo nao pode ficar vazio.");
+        }
+    }
+
+    private static Integer lerInteiro(Scanner scanner, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+            if (!scanner.hasNextLine()) return null;
+            String valor = scanner.nextLine().trim();
+            try {
+                return Integer.parseInt(valor);
+            } catch (NumberFormatException e) {
+                System.out.println("Digite um numero inteiro valido.");
+            }
+        }
+    }
+
+    private static Long lerMicrochip(Scanner scanner, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+            if (!scanner.hasNextLine()) return null;
+            String valor = scanner.nextLine().trim();
+            if (!valor.matches("\\d{8}")) {
+                System.out.println("O microchip deve conter exatamente 8 digitos.");
+                continue;
+            }
+            return Long.parseLong(valor);
+        }
     }
 }

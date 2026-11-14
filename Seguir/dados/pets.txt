@@ -1,0 +1,51 @@
+60218841;Luna;gata;dorme em cima do teclado
+31057720;Thor;cão;late para o aspirador
+48812903;Pipoca;cão;pula quando ouve a palavra “passeio”
+22091187;Mel;gata;derruba copos da mesa, um por um
+70334512;Zeus;cão;tem medo do gato do vizinho
+51200468;Amora;gata;mia para a geladeira
+13870255;Luna;cachorra;rouba meias
+39021746;Bob;cão;come a ração do irmão
+84460013;Bob;gato;dorme 20 horas por dia
+27719384;Lola;cachorra;adora tomar banho
+65502291;Paçoca;gato;caça o ponteiro laser
+44183067;Frida;cachorra;usa laço e se acha
+90027758;Simba;gato;acha que é leão
+18345602;Nina;coelha;rói o fio do carregador
+76690431;Pandora;gata;abre portas sozinha
+33208179;Chico;papagaio;imita o toque do celular
+57741820;Thor;gato;tem nome de cão, mas é gato
+81196354;Fred;hamster;corre a noite inteira na rodinha
+29573006;Luna;calopsita;assobia quando alguém chega
+62015547;Toddy;cão;só come se for na mão
+47019263;Mel;coelha;empurra a tigela pela casa
+91836420;Thor;calopsita;imita o barulho do micro-ondas
+23658149;Luna;gata;dorme dentro de caixas pequenas
+74102586;Bidu;cão;esconde bolinhas embaixo do tapete
+38547012;Amora;coelha;bate as patas quando quer carinho
+65283917;Pipoca;gata;derruba brinquedos da prateleira
+10472836;Nina;calopsita;canta quando a casa fica silenciosa
+82931654;Bob;hamster;guarda comida nas bochechas
+56380741;Lola;gata;segue o reflexo do sol pela parede
+29164583;Paçoca;cão;corre quando escuta o pote de ração
+67823105;Chico;papagaio;chama todo mundo pelo nome
+34298716;Frida;gata;dorme em cima das roupas limpas
+80514279;Toby;cão;carrega um brinquedo para todo lugar
+19756308;Mel;calopsita;assobia para o espelho
+43682017;Zeus;gato;derruba objetos para chamar atenção
+72039465;Nina;gata;amassa cobertores antes de dormir
+31476092;Amora;cachorra;persegue folhas no quintal
+58912347;Luna;coelha;rouba pedaços de papel
+96720531;Fred;gato;abre a porta do armário
+25381640;Simba;cão;late para a própria sombra
+63849172;Pipoca;calopsita;dança quando ouve música
+17028364;Bidu;gato;senta dentro da pia
+89451203;Thor;cão;traz a guia antes do passeio
+40567129;Lola;coelha;gosta de empurrar uma bola
+78193625;Paçoca;calopsita;repete o som da campainha
+32654018;Frida;cachorra;escolhe sempre a almofada maior
+54987231;Toby;hamster;corre na rodinha ao amanhecer
+61273840;Chico;gato;observa os peixes por horas
+20849615;Zeus;cão;dorme de barriga para cima
+93517026;Mel;gata;miando, abre a torneira
+15782469;Nina;coelha;esconde cenouras no feno
