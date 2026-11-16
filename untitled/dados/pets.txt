@@ -21,34 +21,34 @@
 81196354;Fred;hamster;corre a noite inteira na rodinha
 29573006;Luna;calopsita;assobia quando alguém chega
 62015547;Toddy;cão;só come se for na mão
-# ---- 30 bichinhos novos criados pelo grupo ----
-47120395;Luna;cachorra;late para a própria sombra
-85301726;Luna;gata;dorme dentro da máquina de lavar
-19274635;Luna;coelha;rói o rodapé da cozinha
-12093847;Thor;cão;esconde o controle remoto
-66489012;Thor;coelho;cava buracos no sofá
-56481920;Thor;calopsita;grita quando o dono sai de casa
-30958174;Bob;hamster;guarda comida nas bochechas para o inverno
-92846105;Bob;papagaio;canta o hino do time
-74036518;Bob;cão;dorme de barriga para cima
-54017263;Mel;cachorra;chora quando a novela acaba
-23674018;Mel;gata;derruba o porta-retrato toda manhã
-59302714;Amor;gata;só dorme no colo da visita
-16748390;Roma;cachorra;late para pombos imaginários
-71520936;Max;cão;foge do banho pulando o muro
-38841052;Nala;gata;acha que é dona da casa
-80265143;Bidu;cão;espirra quando está feliz
-43910578;Pretinha;gata;bebe água da torneira
-27365081;Paçoca;cão;enterra meias no quintal
-64829310;Pipoca;hamster;dá cambalhota na rodinha
-95102846;Nina;calopsita;assobia a música do caminhão de gás
-34587019;Maya;gata;persegue a luz do celular
-78603425;Tobias;jabuti;foge, mas muito devagar
-11594068;Fred;cão;tem ciúmes do aspirador
-50738291;Kiara;cachorra;usa capa de chuva e se acha
-87412650;Simba;cão;rosna para o espelho
-25089734;Lola;gata;mia às 4 da manhã
-69157803;Zeus;gato;derruba vasos de planta
-40623187;Belinha;coelha;ataca cadarços
-83950472;Chico;cão;anda de skate no parque
-32719864;Frida;gata;pede ração batendo na tigela
+# ---- 30 bichinhos criados pelo grupo  ----
+47120395;Wuant;cão;rosna quando alguém fala alto no microfone
+85301726;Wuant;gato;dorme em cima do teclado gamer
+19274635;Wuant;hamster;corre na rodinha às 3 da manhã
+12093847;Batman;cão;só sai para passear à noite
+66489012;Batman;gato;dorme de cabeça para baixo no encosto do sofá
+56481920;Batman;calopsita;se esconde no escuro atrás da geladeira
+30958174;Rezende;cão;cava buracos no quintal procurando diamantes
+92846105;Rezende;papagaio;imita o barulho do videogame
+74036518;Bolinha;gata;molha a boca para lamber a pata
+54017263;Flash;cão;come a ração em dois segundos
+23674018;Whindersson;cão;uiva quando alguém canta no chuveiro
+59302714;Hulk;cão;fica furioso quando acaba o petisco
+16748390;AuthenticGames;gato;caça o cursor do mouse na tela
+71520936;Cellbit;gato;fica encarando a parede às 3 da manhã
+38841052;T3ddy;coelho;rói o fio do fone de ouvido
+80265143;Groot;gato;passa o dia dentro do vaso de planta
+43910578;Kéfera;gata;mia para a câmera do celular
+27365081;Castanhari;papagaio;repete as curiosidades que ouve na TV
+64829310;BRKsEDU;cão;pega o controle do videogame e não devolve
+95102846;Jazzghost;gato;some pela casa e aparece do nada
+34587019;Robin;hamster;anda sempre atrás do Batman
+78603425;Aquaman;cão;pula em toda poça d'água que vê
+11594068;Malena;gata;assiste vídeo de passarinho no tablet
+50738291;Sirkazzio;cão;late para o próprio reflexo na janela
+87412650;Windoh;jabuti;foge, mas muito devagar
+25089734;Feromonas;gato;derruba vasos de planta
+69157803;D4rkFrame;gato;só sai da caixa de papelão à noite
+40623187;Tiagovski;cão;persegue o próprio rabo
+83950472;Superman;coelha;pula do sofá achando que sabe voar
+32719864;Tazer;cão;anda de skate no parque
