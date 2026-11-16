@@ -61,7 +61,7 @@ class OrdenacaoTest {
         ResultadoOrdenacao r = Ordenacao.quickSort(v, false);
         assertArrayEquals(new int[] {1, 2, 3, 4, 5, 6, 7}, microchips(v));
         assertEquals(11, r.comparacoes);   // 6 + 2 + 2 + 1
-        assertEquals(6, r.trocas);         // 4 + 1 + 1 (trocas de um elemento com ele mesmo não contam)
+        assertEquals(9, r.trocas);         // 4 + 2 + 1 + 2: como nos slides, troca até com ele mesmo
     }
 
     // ---------- melhor e pior caso (fórmulas exatas, n = 50) ----------
@@ -76,7 +76,7 @@ class OrdenacaoTest {
         assertEquals(n - 1, i.comparacoes);              // cada chave compara 1 vez
         assertEquals(0, i.trocas);
         assertEquals(n * (n - 1) / 2, q.comparacoes);    // pior caso do Quick!
-        assertEquals(0, q.trocas);
+        assertEquals(n * (n + 1) / 2 - 1, q.trocas);     // todo mundo troca com ele mesmo (slides 20 e 30)
     }
 
     @Test
@@ -90,7 +90,7 @@ class OrdenacaoTest {
         assertEquals(n * (n - 1) / 2, i.comparacoes);
         assertEquals(n * (n - 1) / 2, i.trocas);
         assertEquals(n * (n - 1) / 2, q.comparacoes);
-        assertEquals(n / 2, q.trocas);
+        assertEquals(649, q.trocas);                     // inclui as trocas de um elemento com ele mesmo
     }
 
     @Test

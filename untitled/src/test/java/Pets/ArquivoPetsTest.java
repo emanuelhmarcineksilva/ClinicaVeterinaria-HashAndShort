@@ -59,8 +59,19 @@ class ArquivoPetsTest {
         for (Pet p : ArquivoPets.lerPets("dados/pets.txt")) {
             t.inserir(p);
         }
-        assertTrue(t.buscarPorNome("Luna").length >= 5);
-        assertTrue(t.buscarPorNome("Thor").length >= 3);
-        assertTrue(t.buscarPorNome("Bob").length >= 3);
+        assertEquals(3, t.buscarPorNome("Luna").length);           // as 3 Lunas do apêndice
+        assertTrue(t.buscarPorNome("Wuant").length >= 3);          // youtubers repetidos de propósito
+        assertTrue(t.buscarPorNome("Batman").length >= 3);
+        assertEquals(1, t.buscarPorNome("kefera").length);         // acha a Kéfera sem acento
+        assertEquals(1, t.buscarPorNome("Bolinha").length);
+    }
+
+    @Test
+    void keferaEMalenaTemAMesmaSomaEColidemEmQualquerM() {
+        for (int m : new int[]{13, 17, 31}) {
+            assertEquals(TabelaHash.hashSoma("KEFERA", m), TabelaHash.hashSoma("MALENA", m));
+        }
+        // a função do grupo (ponderada) separa as duas
+        assertNotEquals(TabelaHash.hashPonderada("KEFERA", 13), TabelaHash.hashPonderada("MALENA", 13));
     }
 }

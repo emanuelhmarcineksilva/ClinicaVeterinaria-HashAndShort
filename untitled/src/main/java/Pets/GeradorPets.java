@@ -5,17 +5,20 @@ import java.util.Random;
 // Cria bichinhos aleatórios para a Grande Corrida (1.000 e 10.000)
 public class GeradorPets {
 
+    // 16 nomes, 8 espécies e 8 manias (potências de 2): trocar os textos não muda os sorteios,
+    // então os microchips (e as contagens da Grande Corrida) continuam os mesmos
     private static final String[] NOMES = {
-        "Luna", "Thor", "Bob", "Mel", "Nina", "Zeus", "Amora", "Pipoca",
-        "Lola", "Frida", "Simba", "Chico", "Fred", "Toddy", "Pandora", "Pacoca"
+        "Wuant", "Rezende", "Kéfera", "Malena", "Whindersson", "Cellbit", "T3ddy", "Castanhari",
+        "Batman", "Flash", "Hulk", "Groot", "Robin", "Aquaman", "Superman", "Bolinha"
     };
     private static final String[] ESPECIES = {
-        "cao", "gata", "gato", "cachorra", "coelho", "calopsita", "hamster", "papagaio"
+        "cão", "gata", "gato", "cachorra", "coelho", "calopsita", "hamster", "papagaio"
     };
     private static final String[] MANIAS = {
-        "rouba meias", "late para o aspirador", "mia para a geladeira",
-        "dorme em cima do teclado", "come a racao do irmao", "caca o ponteiro laser",
-        "tem medo de sacola plastica", "assobia quando alguem chega"
+        "molha a boca para lamber a pata", "só sai para passear à noite",
+        "come a ração em dois segundos", "fica furioso quando acaba o petisco",
+        "dorme dentro do vaso de planta", "pula do sofá achando que sabe voar",
+        "late para o microfone", "derruba tudo da mesa e sai correndo"
     };
 
     // Semente fixa: toda execução gera os mesmos pets (bom para repetir medições)

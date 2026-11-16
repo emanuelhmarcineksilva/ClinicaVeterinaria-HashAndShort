@@ -24,11 +24,13 @@ class GrandeCorridaTest {
     @Test
     void geradorRepeteNomesDePropositoParaProvocarColisoes() {
         Pet[] pets = GeradorPets.gerarOrdenados(1000);
-        int lunas = 0;
+        int batmans = 0, keferas = 0;
         for (Pet p : pets) {
-            if (p.getChaveNome().equals("LUNA")) lunas++;
+            if (p.getChaveNome().equals("BATMAN")) batmans++;
+            if (p.getChaveNome().equals("KEFERA")) keferas++;   // "Kéfera" normalizada
         }
-        assertTrue(lunas > 1);
+        assertTrue(batmans > 1);       // youtubers e heróis repetidos de propósito
+        assertTrue(keferas > 1);
     }
 
     @Test

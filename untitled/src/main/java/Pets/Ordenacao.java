@@ -91,27 +91,30 @@ public class Ordenacao {
     public static ResultadoOrdenacao insertionSort(Pet[] v, boolean narrar) {
         ResultadoOrdenacao r = new ResultadoOrdenacao("Insertion Sort");
 
+        // Começamos em 1, pois a posição 0 sozinha já está "ordenada".
         for (int i = 1; i < v.length; i++) {
             Pet chave = v[i];                             // o bichinho que sai da fila
-            int j = i - 1;
+            int j = i - 1;                                // último lugar da parte já organizada
             if (narrar) System.out.println("\n== Insertion Sort - " + ficha(chave)
                     + " sai da fila (posicao " + i + ") ==");
 
-            while (j >= 0) {
+            // Enquanto houver bichinho à esquerda com microchip MAIOR que a chave,
+            // ele anda uma casa para trás (como nos slides: j >= 0 e v[j] > chave)
+            while (j >= 0 && v[j].getMicrochip() > chave.getMicrochip()) {
                 r.comparacoes++;
-                if (v[j].getMicrochip() > chave.getMicrochip()) {
-                    if (narrar) System.out.println("  " + ficha(v[j]) + " > " + ficha(chave)
-                            + "? SIM -> " + v[j].getNome() + " anda um lugar para tras (posicao "
-                            + (j + 1) + ")");
-                    v[j + 1] = v[j];                      // DESLOCAMENTO
-                    r.trocas++;
-                    j--;
-                } else {
-                    if (narrar) System.out.println("  " + ficha(v[j]) + " > " + ficha(chave)
-                            + "? NAO -> achou o lugar.");
-                    break;
-                }
+                if (narrar) System.out.println("  " + ficha(v[j]) + " > " + ficha(chave)
+                        + "? SIM -> " + v[j].getNome() + " anda um lugar para tras (posicao "
+                        + (j + 1) + ")");
+                v[j + 1] = v[j];                          // DESLOCAMENTO
+                r.trocas++;
+                j--;
             }
+            if (j >= 0) {                                 // a comparação que fez o while parar
+                r.comparacoes++;
+                if (narrar) System.out.println("  " + ficha(v[j]) + " > " + ficha(chave)
+                        + "? NAO -> achou o lugar.");
+            }
+            // Quando o laço para, j+1 é o lugar certo da chave.
             v[j + 1] = chave;
             if (narrar) {
                 System.out.println("  " + chave.getNome() + " volta para a fila na posicao " + (j + 1)
@@ -126,53 +129,56 @@ public class Ordenacao {
     // ---------------- QUICK SORT ----------------
     public static ResultadoOrdenacao quickSort(Pet[] v, boolean narrar) {
         ResultadoOrdenacao r = new ResultadoOrdenacao("Quick Sort");
-        quickSortRecursivo(v, 0, v.length - 1, r, narrar);
+        quickSort(v, 0, v.length - 1, r, narrar);
         return r;
     }
 
-    private static void quickSortRecursivo(Pet[] v, int inicio, int fim,
-                                           ResultadoOrdenacao r, boolean narrar) {
-        if (inicio < fim) {                               // 0 ou 1 bichinho: nada a fazer
-            int p = particionar(v, inicio, fim, r, narrar);
-            quickSortRecursivo(v, inicio, p - 1, r, narrar);   // quem sai antes
-            quickSortRecursivo(v, p + 1, fim, r, narrar);      // quem sai depois
+    private static void quickSort(Pet[] v, int inicio, int fim, ResultadoOrdenacao r, boolean narrar) {
+        // Caso base: com 0 ou 1 bichinho não há nada a organizar.
+        if (inicio < fim) {
+            int posPivot = particionar(v, inicio, fim, r, narrar);
+            quickSort(v, inicio, posPivot - 1, r, narrar);    // ordena quem sai antes (menores)
+            quickSort(v, posPivot + 1, fim, r, narrar);       // ordena quem sai depois (maiores)
         }
     }
 
-    private static int particionar(Pet[] v, int inicio, int fim,
-                                   ResultadoOrdenacao r, boolean narrar) {
-        Pet pivo = v[fim];                                // pivô = último do trecho
-        int i = inicio - 1;                               // fim da área de "quem sai antes"
+    // Organiza o trecho v[inicio..fim] em torno do pivot e devolve a posição final do pivot.
+    private static int particionar(Pet[] v, int inicio, int fim, ResultadoOrdenacao r, boolean narrar) {
+        Pet pivot = v[fim];                               // pivot = último elemento
+        int i = inicio - 1;                               // fim da "partição dos menores"
         if (narrar) System.out.println("\n== Quick Sort - posicoes " + inicio + " a " + fim
-                + " da fila | pivo: " + ficha(pivo) + " ==");
+                + " da fila | pivot: " + ficha(pivot) + " ==");
 
         for (int j = inicio; j < fim; j++) {
             r.comparacoes++;
-            if (v[j].getMicrochip() < pivo.getMicrochip()) {
-                i++;
-                if (i != j) {                             // só conta troca de verdade
-                    if (narrar) System.out.println("  " + ficha(v[j])
-                            + " < pivo? SIM -> troca de lugar com " + ficha(v[i]));
-                    trocar(v, i, j);
-                    r.trocas++;
-                } else if (narrar) {
-                    System.out.println("  " + ficha(v[j])
-                            + " < pivo? SIM -> ja esta do lado de quem sai antes");
-                }
+            if (v[j].getMicrochip() < pivot.getMicrochip()) {
+                i++;                                      // abre espaço na partição dos menores
+                if (narrar) System.out.println("  " + ficha(v[j]) + " < pivot? SIM -> "
+                        + trocaNarrada(v, i, j));
+                trocar(v, i, j);                          // e leva v[j] para lá
+                r.trocas++;
             } else if (narrar) {
-                System.out.println("  " + ficha(v[j]) + " < pivo? NAO -> fica do lado de quem sai depois");
+                System.out.println("  " + ficha(v[j]) + " < pivot? NAO -> fica do lado de quem sai depois");
             }
         }
-        if (i + 1 != fim) {                               // pivô vai para o lugar definitivo
-            trocar(v, i + 1, fim);
-            r.trocas++;
-        }
+        // A próxima posição disponível (i+1) é o lugar certo do pivot.
+        if (narrar) System.out.println("  pivot -> " + trocaNarrada(v, i + 1, fim));
+        trocar(v, i + 1, fim);
+        r.trocas++;
         if (narrar) {
-            System.out.println("  " + pivo.getNome() + " vai para a posicao " + (i + 1)
+            System.out.println("  " + pivot.getNome() + " vai para a posicao " + (i + 1)
                     + " (lugar definitivo) | total -> comparacoes: " + r.comparacoes
                     + " | trocas: " + r.trocas);
             mostrarFila(v);
         }
         return i + 1;
+    }
+
+    // Como nos slides, o algoritmo troca SEMPRE, até um bichinho com ele mesmo (😄)
+    private static String trocaNarrada(Pet[] v, int a, int b) {
+        if (a == b) {
+            return v[b].getNome() + " troca de lugar com ele mesmo";
+        }
+        return v[b].getNome() + " troca de lugar com " + ficha(v[a]);
     }
 }

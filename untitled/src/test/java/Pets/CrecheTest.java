@@ -93,6 +93,9 @@ class CrecheTest {
         assertTrue(tela.contains("troca de lugar com"), tela);
         assertTrue(tela.contains("lado de quem sai depois"), tela);
         assertTrue(tela.contains("(lugar definitivo)"), tela);
+        // vetor dos slides: o 1 troca de lugar com ele mesmo (slide 20)
+        String slides = capturarTela(() -> Ordenacao.quickSort(OrdenacaoTest.fila(7, 1, 3, 5, 2, 6, 4), true));
+        assertTrue(slides.contains("troca de lugar com ele mesmo"), slides);
     }
 
     // ---------- o menu e um dia inteiro na creche ----------
@@ -137,13 +140,16 @@ class CrecheTest {
         String tela = rodarPrograma(
                 "4\n"              // mostrar os canis
                 + "2\nluna\n"      // procurar as Lunas
+                + "2\nbatman\n"    // procurar os Batman (digitado em minúsculas)
                 + "3\n13870255\n"  // a Luna cachorra foi para casa
                 + "5\n"            // lotação da creche
                 + "abc\n"          // digitou errado
                 + "0\n");          // fechar a creche
         assertTrue(tela.contains("50 bichinhos chegaram na creche"), tela);
         assertTrue(tela.contains("Canil 5: "), tela);
-        assertTrue(tela.contains("6 bichinho(s) encontrado(s)"), tela);
+        assertTrue(tela.contains("3 bichinho(s) encontrado(s)"), tela);
+        assertTrue(tela.contains("Chave BATMAN -> canil 6"), tela);
+        assertTrue(tela.contains("Batman (calopsita)"), tela);
         assertTrue(tela.contains("Tchau, Luna! Saiu do canil 5."), tela);
         assertTrue(tela.contains("superlotada"), tela);
         assertTrue(tela.contains("Digite apenas numeros."), tela);
