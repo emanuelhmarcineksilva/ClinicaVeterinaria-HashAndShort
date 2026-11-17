@@ -1,0 +1,54 @@
+# Bichinhos da Creche dos Bichos - formato: microchip;nome;especie;mania
+# Linhas que comecam com # sao ignoradas. Microchip: 8 digitos, nunca repete.
+# ---- Turminha inicial (Apendice do enunciado) ----
+60218841;Luna;gata;dorme em cima do teclado
+31057720;Thor;cão;late para o aspirador
+48812903;Pipoca;cão;pula quando ouve a palavra "passeio"
+22091187;Mel;gata;derruba copos da mesa, um por um
+70334512;Zeus;cão;tem medo do gato do vizinho
+51200468;Amora;gata;mia para a geladeira
+13870255;Luna;cachorra;rouba meias
+39021746;Bob;cão;come a ração do irmão
+84460013;Bob;gato;dorme 20 horas por dia
+27719384;Lola;cachorra;adora tomar banho
+65502291;Paçoca;gato;caça o ponteiro laser
+44183067;Frida;cachorra;usa laço e se acha
+90027758;Simba;gato;acha que é leão
+18345602;Nina;coelha;rói o fio do carregador
+76690431;Pandora;gata;abre portas sozinha
+33208179;Chico;papagaio;imita o toque do celular
+57741820;Thor;gato;tem nome de cão, mas é gato
+81196354;Fred;hamster;corre a noite inteira na rodinha
+29573006;Luna;calopsita;assobia quando alguém chega
+62015547;Toddy;cão;só come se for na mão
+# ---- 30 bichinhos criados pelo grupo  ----
+47120395;Wuant;cão;rosna quando alguém fala alto no microfone
+85301726;Wuant;gato;dorme em cima do teclado gamer
+19274635;Wuant;hamster;corre na rodinha às 3 da manhã
+12093847;Batman;cão;só sai para passear à noite
+66489012;Batman;gato;dorme de cabeça para baixo no encosto do sofá
+56481920;Batman;calopsita;se esconde no escuro atrás da geladeira
+30958174;Rezende;cão;cava buracos no quintal procurando diamantes
+92846105;Rezende;papagaio;imita o barulho do videogame
+74036518;Bolinha;gata;molha a boca para lamber a pata
+54017263;Flash;cão;come a ração em dois segundos
+23674018;Whindersson;cão;uiva quando alguém canta no chuveiro
+59302714;Hulk;cão;fica furioso quando acaba o petisco
+16748390;AuthenticGames;gato;caça o cursor do mouse na tela
+71520936;Cellbit;gato;fica encarando a parede às 3 da manhã
+38841052;T3ddy;coelho;rói o fio do fone de ouvido
+80265143;Groot;gato;passa o dia dentro do vaso de planta
+43910578;Kéfera;gata;mia para a câmera do celular
+27365081;Castanhari;papagaio;repete as curiosidades que ouve na TV
+64829310;BRKsEDU;cão;pega o controle do videogame e não devolve
+95102846;Jazzghost;gato;some pela casa e aparece do nada
+34587019;Robin;hamster;anda sempre atrás do Batman
+78603425;Aquaman;cão;pula em toda poça d'água que vê
+11594068;Malena;gata;assiste vídeo de passarinho no tablet
+50738291;Sirkazzio;cão;late para o próprio reflexo na janela
+87412650;Windoh;jabuti;foge, mas muito devagar
+25089734;Feromonas;gato;derruba vasos de planta
+69157803;D4rkFrame;gato;só sai da caixa de papelão à noite
+40623187;Tiagovski;cão;persegue o próprio rabo
+83950472;Superman;coelha;pula do sofá achando que sabe voar
+32719864;Tazer;cão;anda de skate no parque
